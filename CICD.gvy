@@ -1,7 +1,13 @@
 pipeline {
     agent any
     stages {
-        stage('build & push docker image') {
+        stage('checkout') {
+            steps {
+                echo 'checkout phpweb..'
+                git branch: 'main', url: 'https://github.com/el-chen/phpweb'
+           }
+        }
+		stage('build & push docker image') {
             steps {
               withDockerRegistry(credentialsId: 'dockerhub_cred', url: 'https://index.docker.io/v1/') {
                     sh script: 'cd  $WORKSPACE'
