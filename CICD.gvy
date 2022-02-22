@@ -21,5 +21,10 @@ pipeline {
                     sh script: 'sudo ansible-playbook --inventory /etc/ansible/host $WORKSPACE/deploy/deploy.yml --extra-vars "env=qa build=$BUILD_NUMBER"'
            }
         }
+        stage('deploy-PROD') {
+            steps {
+                    sh script: 'sudo ansible-playbook --inventory /etc/ansible/host $WORKSPACE/deploy/deploy.yml --extra-vars "env=prod build=$BUILD_NUMBER"'
+           }
+        }
     }
 }
